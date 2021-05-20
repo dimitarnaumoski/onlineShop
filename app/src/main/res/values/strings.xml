@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">onlineShop</string>
+    <string name="facebook_app_id">714151106650256</string>
+    <string name="fb_login_protocol_scheme">fb714151106650256</string>
+
+</resources>
