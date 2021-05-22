@@ -12,7 +12,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="60dp"
     android:paddingBottom="133dp"
-    tools:context=".LoginActivity"
+    tools:context=".activities.LoginActivity"
     android:background="@drawable/bggg">
 
     <TextView

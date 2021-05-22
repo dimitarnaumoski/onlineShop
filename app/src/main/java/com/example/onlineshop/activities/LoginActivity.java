@@ -1,18 +1,18 @@
-package com.example.onlineshop;
+package com.example.onlineshop.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.onlineshop.R;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -35,7 +35,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -44,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 123;
+
+    // FirstTimeLogin
+    SharedPreferences sharedPreferences;
 
     // Facebook
     private CallbackManager mCallbackManager;
@@ -121,6 +123,20 @@ public class LoginActivity extends AppCompatActivity {
                 signInGoogle();
             }
         });
+
+        // FirstTimeLogin
+        sharedPreferences = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean("firstTime", true);
+
+        if(isFirstTime) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstTime",false);
+            editor.commit();
+
+            Intent intent = new Intent(LoginActivity.this,onBoardingActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void  handleFacebookToken(AccessToken token) {
@@ -176,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if(task.isSuccessful()){
-                                    Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Error"+task.getException(), Toast.LENGTH_SHORT).show();
@@ -238,7 +254,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = auth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
