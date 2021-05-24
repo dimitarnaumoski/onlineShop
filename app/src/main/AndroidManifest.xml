@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineShop">
-        <activity android:name=".activities.onBoardingActivity">
-        </activity>
+        <activity android:name=".activities.DetailedActivity"></activity>
+        <activity android:name=".activities.onBoardingActivity"></activity>
         <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
