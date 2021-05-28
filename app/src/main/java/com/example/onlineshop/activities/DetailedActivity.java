@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +35,7 @@ public class DetailedActivity extends AppCompatActivity {
 
     ImageView detailedImg;
     TextView rating,name,description,price,quantity;
-    Button addToCart,butNow;
+    Button addToCart,buyNow;
     ImageView addItems,removeItems;
 
     Toolbar toolbar;
@@ -86,7 +87,7 @@ public class DetailedActivity extends AppCompatActivity {
         price = findViewById(R.id.detailed_price);
 
         addToCart = findViewById(R.id.add_to_cart);
-        butNow = findViewById(R.id.buy_now);
+        buyNow = findViewById(R.id.buy_now);
 
         addItems = findViewById(R.id.add_item);
         removeItems = findViewById(R.id.remove_item);
@@ -127,6 +128,28 @@ public class DetailedActivity extends AppCompatActivity {
             totalPrice = showAllModel.getPrice() * totalQuantity;
         }
 
+        // Buy Now
+        buyNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailedActivity.this,AddressActivity.class);
+
+                if (newProductsModel != null) {
+                    intent.putExtra("item",newProductsModel);
+                }
+                if (popularProductsModel != null) {
+                    intent.putExtra("item",popularProductsModel);
+                }
+                if (showAllModel != null) {
+                    intent.putExtra("item",showAllModel);
+                }
+                startActivity(intent);
+
+            }
+        });
+
+
+        // Add To Cart
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
