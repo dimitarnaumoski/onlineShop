@@ -39,6 +39,13 @@ public class AddAddressActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
@@ -60,13 +67,14 @@ public class AddAddressActivity extends AppCompatActivity {
                 String final_address = "";
 
                 if(!userName.isEmpty()){
-                    final_address+=userName;
+                    final_address+=userName+", ";
+
                 }
                 if(!userCity.isEmpty()){
-                    final_address+=userCity;
+                    final_address+=userCity+", ";
                 }
                 if(!userAddress.isEmpty()){
-                    final_address+=userAddress;
+                    final_address+=userAddress+", ";
                 }
                 if(!userNumber.isEmpty()){
                     final_address+=userNumber;

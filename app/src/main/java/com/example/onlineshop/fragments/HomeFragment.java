@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment {
 
         slideModels.add(new SlideModel(R.drawable.banner1, "Discount On Shoes Items", ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel(R.drawable.banner2, "Discount On Perfume", ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.banner3, "70% Off", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel(R.drawable.banner3, "Discount On Shirts", ScaleTypes.CENTER_CROP));
 
         imagesSlider.setImageList(slideModels);
 

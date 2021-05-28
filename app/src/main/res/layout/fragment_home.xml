@@ -45,7 +45,7 @@
                 android:fontFamily="@font/amethysta"
                 android:gravity="end"
                 android:text="See All"
-                android:textColor="@color/pink"
+                android:textColor="@color/textHeading"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/new_product_name"
                         android:layout_marginLeft="9dp"
-                        android:text="We provide best products." />
+                        android:text="We provide the best products." />
 
                     <TextView
                         android:id="@+id/newProducts_see_all"
@@ -101,7 +101,7 @@
                         android:layout_marginRight="8dp"
                         android:fontFamily="@font/amethysta"
                         android:text="See All"
-                        android:textColor="@color/pink"
+                        android:textColor="@color/textHeading"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/popular_products"
                     android:layout_marginLeft="9dp"
-                    android:text="We provide best products." />
+                    android:text="We provide the best products." />
 
                 <TextView
                     android:id="@+id/popular_see_all"
@@ -151,7 +151,7 @@
                     android:layout_marginRight="8dp"
                     android:fontFamily="@font/amethysta"
                     android:text="See All"
-                    android:textColor="@color/pink"
+                    android:textColor="@color/textHeading"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </RelativeLayout>

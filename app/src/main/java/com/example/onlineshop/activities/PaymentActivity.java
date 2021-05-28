@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.onlineshop.R;
@@ -22,6 +23,13 @@ public class PaymentActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.payment_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         double amount = 0.0;
         amount = getIntent().getDoubleExtra("amount", 0.0);

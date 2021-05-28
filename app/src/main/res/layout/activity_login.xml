@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="60dp"
-    android:paddingBottom="133dp"
+    android:paddingBottom="265dp"
     tools:context=".activities.LoginActivity"
     android:background="@drawable/bggg">
 
@@ -66,7 +66,6 @@
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/pink"
         android:onClick="signin"
         android:padding="15dp"
         android:text="Sign In"
@@ -80,9 +79,11 @@
         app:layout_constraintWidth_percent=".4" />
 
     <Button
+        android:backgroundTint="@color/textHeading"
         android:id="@+id/buttonAnonymous"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:onClick="signinAnonymously"
         android:padding="15dp"
         android:text="Sign In As Guest"
@@ -92,16 +93,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent=".4" />
 
     <Button
-        android:backgroundTint="@color/pink"
         android:id="@+id/googleSignIn"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="Sign In With Google"
+        android:layout_marginTop="5dp"
         android:drawableLeft="@drawable/common_google_signin_btn_icon_light"
         android:textAllCaps="false"
         android:textStyle="bold"
@@ -117,6 +118,7 @@
         android:id="@+id/login_button"
         android:layout_width="195dp"
         android:layout_height="22dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +141,7 @@
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:onClick="signup"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:textSize="19sp"
         android:textStyle="bold"
         android:backgroundTint="@color/pink"
