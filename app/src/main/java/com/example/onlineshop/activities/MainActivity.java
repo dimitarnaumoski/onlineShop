@@ -14,9 +14,15 @@ import android.view.MenuItem;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.fragments.HomeFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     Fragment homeFragment;
 
@@ -28,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+
         auth = FirebaseAuth.getInstance();
         toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
@@ -37,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         homeFragment = new HomeFragment();
         loadFragment(homeFragment);
+
     }
 
     private void loadFragment(Fragment homeFragment) {

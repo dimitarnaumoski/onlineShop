@@ -2,9 +2,15 @@ package com.example.onlineshop.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.onlineshop.R;
@@ -13,7 +19,6 @@ public class PaymentActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView subTotal,discount,shipping,total;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,6 @@ public class PaymentActivity extends AppCompatActivity {
         total = findViewById(R.id.total_amt);
 
         subTotal.setText(amount+" $");
-
 
     }
 }
