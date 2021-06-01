@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="#8ff7fd"
         android:minHeight="?attr/actionBarSize"
-        app:title="All Products"
+        app:title="@string/allProducts"
         android:theme="?attr/actionBarTheme"/>
 
 

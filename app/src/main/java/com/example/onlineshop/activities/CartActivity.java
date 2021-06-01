@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapters.MyCartAdapter;
 import com.example.onlineshop.models.MyCartModel;
-import com.example.onlineshop.models.ShowAllModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,6 +68,7 @@ public class CartActivity extends AppCompatActivity {
         cartAdapter = new MyCartAdapter(this,cartModelList);
         recyclerView.setAdapter(cartAdapter);
 
+
         firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -93,7 +93,8 @@ public class CartActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             int totalBill = intent.getIntExtra("totalAmount",0);
-            overAllAmount.setText("Total Amount: "+totalBill+"$");
+            overAllAmount.setText(getString(R.string.totalPrice2) +totalBill+"$");
         }
     };
+
 }

@@ -89,7 +89,7 @@ public class AddAddressActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(AddAddressActivity.this, "Address Added", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddAddressActivity.this, R.string.address_added, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(AddAddressActivity.this, DetailedActivity.class));
                                 finish();
                             }
@@ -97,7 +97,7 @@ public class AddAddressActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    Toast.makeText(AddAddressActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddAddressActivity.this, R.string.please_fill_all, Toast.LENGTH_SHORT).show();
                 }
 
 

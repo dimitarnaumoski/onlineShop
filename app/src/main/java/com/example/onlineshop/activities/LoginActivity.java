@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -44,8 +43,6 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 123;
 
-    // FirstTimeLogin
-    SharedPreferences sharedPreferences;
 
     // Facebook
     private CallbackManager mCallbackManager;
@@ -54,16 +51,20 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "FacebookAuthentication";
     private AccessTokenTracker accessTokenTracker;
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        FirebaseUser user = auth.getCurrentUser();
-//        if(user != null) {
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = auth.getCurrentUser();
+        if(user != null) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+
+        // Facebook OnStart
+        super.onStart();
+        auth.addAuthStateListener(authStateListener);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,19 +125,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // FirstTimeLogin
-        sharedPreferences = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
-        boolean isFirstTime = sharedPreferences.getBoolean("firstTime", true);
-
-        if(isFirstTime) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("firstTime",false);
-            editor.commit();
-
-            Intent intent = new Intent(LoginActivity.this,onBoardingActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 
     private void  handleFacebookToken(AccessToken token) {
@@ -173,16 +161,16 @@ public class LoginActivity extends AppCompatActivity {
         String userPassword = password.getText().toString();
 
         if(TextUtils.isEmpty(userEmail)){
-            Toast.makeText(this, "Please enter Email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_enter_email, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(userPassword)){
-            Toast.makeText(this, "Please enter Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_enter_password, Toast.LENGTH_SHORT).show();
             return;
         }
         if(userPassword.length() < 6) {
-            Toast.makeText(this, "Password too short, please enter minimum 6 characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.password_too_short, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -192,10 +180,10 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if(task.isSuccessful()){
-                                    Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, R.string.logged_in, Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "Error"+task.getException(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, getString(R.string.error) + task.getException(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -210,10 +198,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Logged In As Guest", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, R.string.logged_in_as_guest, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 } else {
-                    Toast.makeText(LoginActivity.this, "Error"+task.getException(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.error)+task.getException(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -254,22 +242,14 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = auth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, R.string.logged_in, Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Sorry authentication failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, R.string.sorry_auth_failed, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-    }
-
-    // Facebook on start
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        auth.addAuthStateListener(authStateListener);
     }
 
     @Override

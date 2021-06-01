@@ -18,7 +18,6 @@
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.ShowAllActivity" />
         <activity android:name=".activities.DetailedActivity" />
-        <activity android:name=".activities.onBoardingActivity" />
         <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

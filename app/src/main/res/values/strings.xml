@@ -1,14 +1,89 @@
 <resources>
     <string name="app_name">onlineShop</string>
-    <string name="facebook_app_id">714151106650256</string>
-    <string name="fb_login_protocol_scheme">fb714151106650256</string>
+    <string name="facebook_app_id" translatable="false">714151106650256</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb714151106650256</string>
 
-    <string name="first_slide">Choose Your Products</string>
-    <string name="second_slide">Fast Delivery</string>
-    <string name="thrid_slide">Good Service</string>
+    <!-- Login Activity  -->
+    <string name="dont_have_account">Dont Have An Account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in_as_guest">Sign In As Guest</string>
+    <string name="sign_in_with_google">Sign In With Google</string>
 
-    <string name="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium cum deleniti ipsa minus necessitatibus? Aliquam, autem cupiditate et explicabo labore magni molestias, nobis obcaecati odio perspiciatis quisquam sint temporibus tenetur.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_enter_email">Please enter Email address</string>
+    <string name="please_enter_password">Please enter Password</string>
+    <string name="password_too_short">Password too short, please enter minimum 6 characters</string>
+    <string name="logged_in">Logged In</string>
+    <string name="error">Error</string>
+    <string name="logged_in_as_guest">Logged In As Guest</string>
+    <string name="sorry_auth_failed">Sorry authentication failed</string>
+
+    <!-- Register Activity -->
+    <string name="name">Name</string>
+    <string name="alreadyHave">Already Have An Account?</string>
+
+    <string name="please_enter_name">Please enter Name</string>
+    <string name="successfully_registered">Successfully Registered</string>
+    <string name="reg_failed">Registration Failed</string>
+
+<!-- Fragment Home -->
+<!--  Image Slider -->
+    <string name="discount_on_shoes_items">Discount On Shoes Items</string>
+    <string name="discount_on_perfume">Discount On Perfume</string>
+    <string name="discount_on_shirts">Discount On Shirts</string>
+
+    <string name="price">Price: $</string>
+    <string name="price2">Price: </string>
+
+    <string name="seeAll">See All</string>
+    <string name="category">Category</string>
+    <string name="newProducts">New Products</string>
+    <string name="weProvideTheBest">We provide the best products.</string>
+    <string name="popularProducts">Popular Products</string>
+
+<!--  Activity Detailed  -->
+    <string name="productDetailed">Product Details</string>
+    <string name="productName">Product Name: </string>
+    <string name="addToCart">Add To Cart</string>
+    <string name="buyNow">Buy Now</string>
+
+<!--  Address Activity -->
+    <string name="yourAddress">Your Address</string>
+    <string name="addAddress">Add Address</string>
+    <string name="continueToPayment">Continue to payment</string>
+
+    <string name="createAddress">Create Address</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="phoneNumber">Phone Number</string>
+
+    <string name="address_added">Address Added</string>
+    <string name="please_fill_all">Please fill all fields</string>
+    <string name="added_to_cart">Added To Cart</string>
+
+<!-- Activity Payment -->
+    <string name="paymentDetails">Payment Details</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="discount">Discount</string>
+    <string name="shipping">Shipping</string>
+    <string name="total">Total</string>
+    <string name="payNow">Pay now</string>
+
+<!-- Cart Activity -->
+    <string name="myCart">My Cart</string>
+    <string name="totalPrice">Total Price: 0$</string>
+
+<!-- My Cart Item -->
+    <string name="currentDate">Current Date: </string>
+    <string name="currentTime">Current Time: </string>
+    <string name="productPrice">Product Price: </string>
+    <string name="totalPrice2">Total Price: </string>
+    <string name="totalQuantity">Total Quantity: </string>
+
+<!-- Activity Show All -->
+    <string name="allProducts">All Products</string>
+
 
 </resources>

@@ -225,7 +225,7 @@ public class DetailedActivity extends AppCompatActivity {
                         .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(DetailedActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailedActivity.this, R.string.added_to_cart, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

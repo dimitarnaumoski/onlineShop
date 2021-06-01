@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,16 +24,18 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText password;
     private FirebaseAuth auth;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-//        auth = FirebaseAuth.getInstance();
-//        if(auth.getCurrentUser() != null){
-//            startActivity(new Intent(RegistrationActivity.this,MainActivity.class));
-//            finish();
-//        }
+        auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null){
+            startActivity(new Intent(RegistrationActivity.this,LoginActivity.class));
+            finish();
+        }
 
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
@@ -47,21 +50,20 @@ public class RegistrationActivity extends AppCompatActivity {
         String userPassword = password.getText().toString();
 
         if(TextUtils.isEmpty(userName)){
-
-            Toast.makeText(this, "Please enter Name", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, R.string.please_enter_name, Toast.LENGTH_SHORT).show();
+            return;
         }
         if(TextUtils.isEmpty(userEmail)){
-            Toast.makeText(this, "Please enter Email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_enter_email, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(userPassword)){
-            Toast.makeText(this, "Please enter Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_enter_password, Toast.LENGTH_SHORT).show();
             return;
         }
         if(userPassword.length() < 6) {
-            Toast.makeText(this, "Password too short, please enter minimum 6 characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_enter_password, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -71,10 +73,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-                            Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegistrationActivity.this, R.string.successfully_registered, Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegistrationActivity.this,MainActivity.class));
                         } else {
-                            Toast.makeText(RegistrationActivity.this, "Registration Failed"+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegistrationActivity.this, getString(R.string.reg_failed) +task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

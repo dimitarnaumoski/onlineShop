@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Your Address" />
+        app:title="@string/yourAddress" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/address_recycler"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="Add Address"
+        android:text="@string/addAddress"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/payment_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/blue"
-        android:text="Continue to payment"
+        android:text="@string/continueToPayment"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
