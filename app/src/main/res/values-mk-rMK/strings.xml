@@ -58,4 +58,5 @@
     <string name="address_added">Адресата е додадена</string>
     <string name="please_fill_all">Ве молиме пополнете ги сите полиња</string>
     <string name="added_to_cart">Додадено во кошничка</string>
+    <string name="all_address_deleted">Сите адреси се избришани, ве замолуваме да додадете нова</string>
 </resources>

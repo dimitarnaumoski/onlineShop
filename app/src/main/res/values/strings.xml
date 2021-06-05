@@ -28,8 +28,8 @@
     <string name="successfully_registered">Successfully Registered</string>
     <string name="reg_failed">Registration Failed</string>
 
-<!-- Fragment Home -->
-<!--  Image Slider -->
+    <!-- Fragment Home -->
+    <!--  Image Slider -->
     <string name="discount_on_shoes_items">Discount On Shoes Items</string>
     <string name="discount_on_perfume">Discount On Perfume</string>
     <string name="discount_on_shirts">Discount On Shirts</string>
@@ -43,13 +43,13 @@
     <string name="weProvideTheBest">We provide the best products.</string>
     <string name="popularProducts">Popular Products</string>
 
-<!--  Activity Detailed  -->
+    <!--  Activity Detailed  -->
     <string name="productDetailed">Product Details</string>
     <string name="productName">Product Name: </string>
     <string name="addToCart">Add To Cart</string>
     <string name="buyNow">Buy Now</string>
 
-<!--  Address Activity -->
+    <!--  Address Activity -->
     <string name="yourAddress">Your Address</string>
     <string name="addAddress">Add Address</string>
     <string name="continueToPayment">Continue to payment</string>
@@ -63,7 +63,9 @@
     <string name="please_fill_all">Please fill all fields</string>
     <string name="added_to_cart">Added To Cart</string>
 
-<!-- Activity Payment -->
+    <string name="all_address_deleted">All addresses are deleted, please add a new one</string>
+
+    <!-- Activity Payment -->
     <string name="paymentDetails">Payment Details</string>
     <string name="subtotal">Subtotal</string>
     <string name="discount">Discount</string>
@@ -71,18 +73,18 @@
     <string name="total">Total</string>
     <string name="payNow">Pay now</string>
 
-<!-- Cart Activity -->
+    <!-- Cart Activity -->
     <string name="myCart">My Cart</string>
     <string name="totalPrice">Total Price: 0$</string>
 
-<!-- My Cart Item -->
+    <!-- My Cart Item -->
     <string name="currentDate">Current Date: </string>
     <string name="currentTime">Current Time: </string>
     <string name="productPrice">Product Price: </string>
     <string name="totalPrice2">Total Price: </string>
     <string name="totalQuantity">Total Quantity: </string>
 
-<!-- Activity Show All -->
+    <!-- Activity Show All -->
     <string name="allProducts">All Products</string>
 
 

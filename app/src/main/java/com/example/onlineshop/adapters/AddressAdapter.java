@@ -1,7 +1,6 @@
 package com.example.onlineshop.adapters;
 
 import android.content.Context;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,71 +11,76 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.models.AddressModel;
+import com.example.onlineshop.dbroom.Address;
 
 import java.util.List;
 
-public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
+public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHolder>{
 
-    Context context;
-    List<AddressModel> addressModelList;
-    SelectedAddress selectedAddress;
+    private Context context;
+    private List<Address> addressList;
 
-    private RadioButton selectedRadioBtn;
+    private int lastSelectedPosition = -1;
 
-    public AddressAdapter(Context context, List<AddressModel> addressModelList, SelectedAddress selectedAddress) {
+    public AddressAdapter(Context context) {
         this.context = context;
-        this.addressModelList = addressModelList;
-        this.selectedAddress = selectedAddress;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.address_item,parent,false));
+    public AddressAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.address_item, parent, false);
+
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AddressAdapter.MyViewHolder holder, int position) {
+        holder.addressName.setText(this.addressList.get(position).fullName);
+        holder.addressStreet.setText(this.addressList.get(position).address);
+        holder.addressCity.setText(this.addressList.get(position).city);
+        holder.phoneNumber.setText(this.addressList.get(position).phoneNumber);
 
-        holder.address.setText(addressModelList.get(position).getUserAddress());
-        holder.radioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(AddressModel address:addressModelList){
-                    address.setSelected(false);
-                }
-                addressModelList.get(position).setSelected(true);
+        holder.selectionState.setChecked(lastSelectedPosition == position);
 
-                if(selectedRadioBtn != null) {
-                    selectedRadioBtn.setChecked(false);
-                }
-                selectedRadioBtn = (RadioButton) v;
-                selectedRadioBtn.setChecked(true);
-                selectedAddress.setAddress(addressModelList.get(position).getUserAddress());
-
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return addressModelList.size();
+       return this.addressList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView addressName;
+        TextView addressStreet;
+        TextView addressCity;
+        TextView phoneNumber;
 
-        TextView address;
-        RadioButton radioButton;
-        
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            address = itemView.findViewById(R.id.address_add);
-            radioButton = itemView.findViewById(R.id.select_address);
+        public RadioButton selectionState;
+
+
+        public MyViewHolder(View view) {
+            super(view);
+           addressName = view.findViewById(R.id.address_add_name);
+           addressStreet = view.findViewById(R.id.address_add_address);
+           addressCity = view.findViewById(R.id.address_add_city);
+           phoneNumber = view.findViewById(R.id.address_add_number);
+
+           selectionState = view.findViewById(R.id.select_address);
+
+           selectionState.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   lastSelectedPosition = getAdapterPosition();
+                   notifyDataSetChanged();
+               }
+           });
         }
     }
 
-    public interface SelectedAddress {
-        void setAddress(String address);
-    }
 }

@@ -1,34 +1,20 @@
 package com.example.onlineshop.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.onlineshop.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.example.onlineshop.dbroom.Address;
+import com.example.onlineshop.dbroom.AppDatabase;
 
 public class AddAddressActivity extends AppCompatActivity {
 
-    EditText name,address,city,phoneNumber;
     Toolbar toolbar;
-    Button addAddressBtn;
-
-    FirebaseFirestore firestore;
-    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,65 +32,30 @@ public class AddAddressActivity extends AppCompatActivity {
             }
         });
 
-        auth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
-
-        name = findViewById(R.id.ad_name);
-        address = findViewById(R.id.ad_address);
-        city = findViewById(R.id.ad_city);
-        phoneNumber = findViewById(R.id.ad_phone);
-        addAddressBtn = findViewById(R.id.ad_add_address);
+        final EditText fullName = findViewById(R.id.ad_name);
+        final EditText address = findViewById(R.id.ad_address);
+        final EditText city = findViewById(R.id.ad_city);
+        final EditText phoneNumber = findViewById(R.id.ad_phone);
+        Button addAddressBtn = findViewById(R.id.ad_add_address);
 
         addAddressBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String userName = name.getText().toString();
-                String userCity = city.getText().toString();
-                String userAddress = address.getText().toString();
-                String userNumber = phoneNumber.getText().toString();
-
-                String final_address = "";
-
-                if(!userName.isEmpty()){
-                    final_address+=userName+", ";
-
-                }
-                if(!userCity.isEmpty()){
-                    final_address+=userCity+", ";
-                }
-                if(!userAddress.isEmpty()){
-                    final_address+=userAddress+", ";
-                }
-                if(!userNumber.isEmpty()){
-                    final_address+=userNumber;
-                }
-                if (!userName.isEmpty() && !userCity.isEmpty() && !userAddress.isEmpty() && !userNumber.isEmpty()) {
-
-                    Map<String,String> map = new HashMap<>();
-                    map.put("userAddress",final_address);
-
-                    firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
-                            .collection("Address").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(AddAddressActivity.this, R.string.address_added, Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(AddAddressActivity.this, DetailedActivity.class));
-                                finish();
-                            }
-                        }
-                    });
-
-                } else {
-                    Toast.makeText(AddAddressActivity.this, R.string.please_fill_all, Toast.LENGTH_SHORT).show();
-                }
-
-
+                saveNewAddres(fullName.getText().toString(), address.getText().toString(), city.getText().toString(), phoneNumber.getText().toString());
             }
         });
+    }
 
+    private void saveNewAddres(String fullName, String address, String city, String phoneNumber) {
+        AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
 
+        Address user = new Address();
+        user.fullName = fullName;
+        user.address = address;
+        user.city = city;
+        user.phoneNumber = phoneNumber;
+        db.addressDao().insertAddress(user);
 
+        finish();
     }
 }
