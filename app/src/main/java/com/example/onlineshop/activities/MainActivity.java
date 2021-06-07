@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
 
     Fragment homeFragment;
-
     FirebaseAuth auth;
     Toolbar toolbar;
 
@@ -68,13 +68,24 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.menu_logout) {
 
+            clearToken(auth.getCurrentUser().getUid());
+
             auth.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
+
 
         } else if (id == R.id.menu_my_cart) {
             startActivity(new Intent(MainActivity.this, CartActivity.class));
         }
         return true;
+    }
+
+    private void clearToken(String userID) {
+        FirebaseDatabase
+                .getInstance()
+                .getReference("tokens")
+                .child(userID)
+                .removeValue();
     }
 }

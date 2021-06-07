@@ -34,6 +34,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.facebook.FacebookSdk;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 123;
-
+    private static final String TOKEN = "Firebase Token Messaging";
 
     // Facebook
     private CallbackManager mCallbackManager;
@@ -160,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
 
+
         if(TextUtils.isEmpty(userEmail)){
             Toast.makeText(this, R.string.please_enter_email, Toast.LENGTH_SHORT).show();
             return;
@@ -182,11 +185,13 @@ public class LoginActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     Toast.makeText(LoginActivity.this, R.string.logged_in, Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    retrieveAndRestoreToken();
                                 } else {
                                     Toast.makeText(LoginActivity.this, getString(R.string.error) + task.getException(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
+
     }
 
     public void signup(View view) {
@@ -198,6 +203,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
+                    retrieveAndRestoreToken();
                     Toast.makeText(LoginActivity.this, R.string.logged_in_as_guest, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 } else {
@@ -241,6 +247,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            retrieveAndRestoreToken();
+
                             FirebaseUser user = auth.getCurrentUser();
                             Toast.makeText(LoginActivity.this, R.string.logged_in, Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -259,6 +267,32 @@ public class LoginActivity extends AppCompatActivity {
         if(authStateListener != null) {
             auth.removeAuthStateListener(authStateListener);
         }
+    }
+
+    protected void retrieveAndRestoreToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TOKEN, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        FirebaseDatabase.getInstance()
+                                .getReference("tokens")
+                                .child(userID)
+                                .setValue(token);
+
+                        // Log
+                        Log.d(TOKEN, token);
+                        Log.d(TOKEN, "Token Recieved");
+                    }
+                });
     }
 
 

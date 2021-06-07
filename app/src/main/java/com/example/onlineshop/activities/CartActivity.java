@@ -12,8 +12,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.adapters.MyCartAdapter;
@@ -30,12 +33,12 @@ import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
-    int overAllTotalAmount;
     TextView overAllAmount;
     Toolbar toolbar;
     RecyclerView recyclerView;
     List<MyCartModel> cartModelList;
     MyCartAdapter cartAdapter;
+    Button buyNow;
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
 
@@ -67,7 +70,7 @@ public class CartActivity extends AppCompatActivity {
         cartModelList = new ArrayList<>();
         cartAdapter = new MyCartAdapter(this,cartModelList);
         recyclerView.setAdapter(cartAdapter);
-
+        buyNow = findViewById(R.id.buy_now2);
 
         firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -94,7 +97,20 @@ public class CartActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             int totalBill = intent.getIntExtra("totalAmount",0);
             overAllAmount.setText(getString(R.string.totalPrice2) +totalBill+"$");
+            Log.d("MyInt", "value" + totalBill);
+
+            buyNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CartActivity.this,AddressActivity.class);
+                    intent.putExtra("totalBill", totalBill);
+                    startActivity(intent);
+                }
+            });
         }
     };
+
+
+
 
 }
